@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas Journey — Trip Planner</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <!-- Login Page -->
+  <div id="login-page" class="page">
+    <div class="login-hero">
+      <div class="login-hero-content">
+        <div class="login-hero-icon">&#9992;</div>
+        <h1 class="login-hero-title">Atlas Journey</h1>
+        <p class="login-hero-subtitle">Intelligent trip planning for Atlas City<br>powered by algorithms you can trust</p>
+        <div class="login-hero-features">
+          <div class="login-feature">Smart budget optimization for your trip</div>
+          <div class="login-feature">Interactive map with route planning</div>
+          <div class="login-feature">Curated attraction rankings and discovery</div>
+        </div>
+      </div>
+      <div class="login-hero-circles">
+        <div class="circle c1"></div><div class="circle c2"></div><div class="circle c3"></div>
+      </div>
+    </div>
+    <div class="login-form">
+      <div class="login-card">
+        <div class="login-card-icon">&#9992;</div>
+        <h2 class="login-card-title">Plan Your Journey</h2>
+        <p class="login-card-subtitle">Sign in to start exploring Atlas City</p>
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" id="username-input" class="form-input" placeholder="Enter your username" value="admin">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="password-input" class="form-input" placeholder="Enter your password" value="admin">
+        </div>
+        <button id="login-btn" class="btn btn-primary btn-full">Sign In</button>
+        <p class="login-hint">Press Enter or click Sign In to continue</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Shell -->
+  <div id="app-shell" class="hidden">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-icon">&#9992;</span>
+        <span class="brand-name">Atlas<span>/Journey</span></span>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-label">MENU</div>
+      <nav id="sidebar-nav">
+        <a href="#dashboard" class="sidebar-item active" data-page="dashboard" data-title="Overview">
+          <span class="sidebar-icon">&#8962;</span>
+          <span class="sidebar-label">Overview</span>
+        </a>
+        <a href="#trip-planner" class="sidebar-item" data-page="trip-planner" data-title="Smart Itinerary">
+          <span class="sidebar-icon">&#128176;</span>
+          <span class="sidebar-label">Smart Itinerary</span>
+        </a>
+        <a href="#route-planner" class="sidebar-item" data-page="route-planner" data-title="Navigation">
+          <span class="sidebar-icon">&#128205;</span>
+          <span class="sidebar-label">Navigation</span>
+        </a>
+        <a href="#rankings" class="sidebar-item" data-page="rankings" data-title="Discover">
+          <span class="sidebar-icon">&#9733;</span>
+          <span class="sidebar-label">Discover</span>
+        </a>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <a href="#settings" class="sidebar-item" data-page="settings" data-title="Workspace">
+        <span class="sidebar-icon">&#9881;</span>
+        <span class="sidebar-label">Workspace</span>
+      </a>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-version">v1.0.0</div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Header -->
+      <header id="header">
+        <div class="header-left">
+          <h1 id="page-title" class="header-title">Overview</h1>
+          <p id="page-subtitle" class="header-subtitle">Your Atlas City trip at a glance</p>
+        </div>
+        <div class="header-right">
+          <div class="user-chip">
+            <div class="user-avatar">A</div>
+            <span id="user-name" class="user-name">Traveler</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div id="content-area">
+
+        <!-- ── DASHBOARD PAGE ────────────────────────────────────────── -->
+        <div id="page-dashboard" class="content-page active-page">
+          <div class="page-content">
+            <!-- Hero Card -->
+            <div class="hero-card fade-in">
+              <div class="hero-text">
+                <h2 class="hero-title">Welcome back, <span id="dash-hero-username">Traveler</span>!</h2>
+                <p class="hero-subtitle">Explore Atlas City with smart trip optimization</p>
+              </div>
+              <div class="hero-stats">
+                <div class="hero-chip">3 Algorithms</div>
+                <div class="hero-chip">12 Attractions</div>
+                <div class="hero-chip">100% Offline</div>
+              </div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-grid fade-in">
+              <div class="stat-card" data-color="blue">
+                <div class="stat-accent"></div>
+                <div class="stat-icon-area" style="background:rgba(59,130,246,0.12)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                </div>
+                <div class="stat-info">
+                  <span id="stat-attractions" class="stat-value">12</span>
+                  <span class="stat-label">Attractions</span>
+                </div>
+              </div>
+              <div class="stat-card" data-color="green">
+                <div class="stat-accent"></div>
+                <div class="stat-icon-area" style="background:rgba(16,185,129,0.12)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="stat-info">
+                  <span id="stat-locations" class="stat-value">10</span>
+                  <span class="stat-label">Locations</span>
+                </div>
+              </div>
+              <div class="stat-card" data-color="amber">
+                <div class="stat-accent"></div>
+                <div class="stat-icon-area" style="background:rgba(245,158,11,0.12)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </div>
+                <div class="stat-info">
+                  <span id="stat-algorithms" class="stat-value">3</span>
+                  <span class="stat-label">Algorithms</span>
+                </div>
+              </div>
+              <div class="stat-card" data-color="purple">
+                <div class="stat-accent"></div>
+                <div class="stat-icon-area" style="background:rgba(139,92,246,0.12)">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <div class="stat-info">
+                  <span id="stat-offline" class="stat-value">100%</span>
+                  <span class="stat-label">Offline Ready</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dashboard Grid: Left column (map + cards), Right column (snapshots) -->
+            <div class="dashboard-grid fade-in">
+              <!-- Left Column -->
+              <div class="dash-left">
+                <!-- Map Card -->
+                <div class="dash-map-card">
+                  <div class="dash-card-header">
+                    <h3 class="card-title">Atlas City Overview</h3>
+                    <span class="dash-badge">Interactive Map</span>
+                  </div>
+                  <div id="dashboard-map-container" class="svg-map-container svg-map-compact"></div>
+                </div>
+
+                <!-- Upcoming Journey -->
+                <div class="dash-info-card">
+                  <div class="dash-card-header">
+                    <h3 class="card-title">Upcoming Journey</h3>
+                  </div>
+                  <div id="upcoming-journey-content" class="dash-card-body">
+                    <div class="dash-card-icon" style="background:rgba(59,130,246,0.12)">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="dash-card-info">
+                      <span class="dash-card-value">Loading...</span>
+                      <span class="dash-card-label">Check back soon</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Route Snapshot -->
+                <div class="dash-info-card dash-card-link" data-nav="route-planner">
+                  <div class="dash-card-header">
+                    <h3 class="card-title">Route Snapshot</h3>
+                    <span class="dash-link-hint">View Route Planner &rarr;</span>
+                  </div>
+                  <div id="route-snapshot-content" class="dash-card-body">
+                    <div class="dash-card-icon" style="background:rgba(16,185,129,0.12)">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <div class="dash-card-info">
+                      <span class="dash-card-value">No Route Planned</span>
+                      <span class="dash-card-label">Plan a route to see details</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column -->
+              <div class="dash-right">
+                <!-- Quick Actions -->
+                <div class="dash-actions-card">
+                  <h3 class="card-title">Quick Actions</h3>
+                  <div class="quick-actions-list">
+                    <div class="action-card" data-nav="trip-planner">
+                      <div class="action-icon" style="background:var(--green-lt);color:var(--green)">&#128176;</div>
+                      <div class="action-text">
+                        <span class="action-title">Smart Itinerary</span>
+                        <span class="action-desc">Build the perfect day within your budget</span>
+                      </div>
+                      <span class="badge badge-green">Budget</span>
+                    </div>
+                    <div class="action-card" data-nav="route-planner">
+                      <div class="action-icon" style="background:var(--green-lt);color:var(--green)">&#128205;</div>
+                      <div class="action-text">
+                        <span class="action-title">Navigation</span>
+                        <span class="action-desc">Find the shortest route between places</span>
+                      </div>
+                      <span class="badge badge-green">Route</span>
+                    </div>
+                    <div class="action-card" data-nav="rankings">
+                      <div class="action-icon" style="background:var(--green-lt);color:var(--green)">&#9733;</div>
+                      <div class="action-text">
+                        <span class="action-title">Discover</span>
+                        <span class="action-desc">Browse attractions ranked by score</span>
+                      </div>
+                      <span class="badge badge-blue">Rankings</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Budget Snapshot -->
+                <div class="dash-info-card dash-card-link" data-nav="trip-planner">
+                  <div class="dash-card-header">
+                    <h3 class="card-title">Budget Snapshot</h3>
+                    <span class="dash-link-hint">Plan Budget &rarr;</span>
+                  </div>
+                  <div id="budget-snapshot-content" class="dash-card-body">
+                    <div class="dash-card-icon" style="background:rgba(245,158,11,0.12)">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    </div>
+                    <div class="dash-card-info">
+                      <span class="dash-card-value">No Budget Set</span>
+                      <span class="dash-card-label">Plan a trip to see budget</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Discover Snapshot -->
+                <div class="dash-info-card dash-card-link" data-nav="rankings">
+                  <div class="dash-card-header">
+                    <h3 class="card-title">Discover Snapshot</h3>
+                    <span class="dash-link-hint">Explore &rarr;</span>
+                  </div>
+                  <div id="discover-snapshot-content" class="dash-card-body">
+                    <div class="dash-card-icon" style="background:rgba(139,92,246,0.12)">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <div class="dash-card-info">
+                      <span class="dash-card-value">Loading...</span>
+                      <span class="dash-card-label">Discover top attractions</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── BUDGET PLANNER PAGE (Smart Itinerary) ──────────────────── -->
+        <div id="page-trip-planner" class="content-page">
+          <div class="two-column-layout">
+            <div class="control-panel">
+              <div class="card">
+                <div class="card-title-row">
+                  <h3 class="card-title">Budget Settings</h3>
+                    <span class="badge badge-green">0-1 Knapsack</span>
+                </div>
+                <p class="card-desc">Set your budget to optimize attractions using dynamic programming.</p>
+                <div class="form-group">
+                  <label class="form-label">Total Budget ($)</label>
+                  <input type="number" id="budget-input" class="form-input" value="500" min="0" step="10">
+                </div>
+                <button id="solve-knapsack-btn" class="btn btn-primary btn-full">Optimize Budget</button>
+                <div class="btn-group">
+                  <button id="example-budget-btn" class="btn btn-secondary btn-full">Load Example Budget</button>
+                  <button id="reset-data-btn" class="btn btn-secondary btn-full">Reset Demo Data</button>
+                </div>
+              </div>
+
+              <!-- Budget Health -->
+              <div id="budget-health" class="card">
+                <h3 class="card-title">Budget Health</h3>
+                <p class="card-desc" style="margin-bottom:0">Set a budget and optimize to see health metrics.</p>
+              </div>
+
+              <!-- Summary -->
+              <div id="budget-summary" class="card hidden">
+                <div class="card-title-row">
+                  <h3 class="card-title">Result Summary</h3>
+                  <span class="badge badge-green">0-1 KP</span>
+                </div>
+                <div class="summary-chips">
+                  <div class="chip chip-blue"><span class="chip-label">Total Cost</span><span id="ks-cost" class="chip-value">$0</span></div>
+                  <div class="chip chip-green"><span class="chip-label">Total Value</span><span id="ks-value" class="chip-value">0</span></div>
+                  <div class="chip chip-amber"><span class="chip-label">Remaining</span><span id="ks-remaining" class="chip-value">$0</span></div>
+                  <div class="chip chip-purple"><span class="chip-label">Items</span><span id="ks-count" class="chip-value">0</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="results-panel">
+              <div class="card">
+                <h3 class="card-title">Selected Experiences</h3>
+                <div id="knapsack-results" class="results-list">
+                  <div class="empty-state">
+                    <div class="empty-icon">&#128270;</div>
+                    <p class="empty-title">No itinerary generated yet</p>
+                    <p class="empty-desc">Enter your budget and click "Optimize Budget" to find the best attractions.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card" id="skipped-card">
+                <h3 class="card-title">Skipped Attractions</h3>
+                <div id="knapsack-skipped" class="results-list">
+                  <div class="empty-state-sm">Skipped items will appear here after optimization.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ROUTE PLANNER PAGE ────────────────────────────────────── -->
+        <div id="page-route-planner" class="content-page">
+          <div class="two-column-layout">
+            <div class="control-panel">
+              <div class="card">
+                <div class="card-title-row">
+                  <h3 class="card-title">Route Controls</h3>
+                  <span class="badge badge-green">Dijkstra</span>
+                </div>
+                <p class="card-desc">Find the shortest path between two locations in Atlas City.</p>
+                <div class="form-group">
+                  <label class="form-label">Starting Location</label>
+                  <select id="start-location" class="form-select"></select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Destination</label>
+                  <select id="end-location" class="form-select"></select>
+                </div>
+                <button id="find-route-btn" class="btn btn-primary btn-full">Find Shortest Path</button>
+                <button id="example-route-btn" class="btn btn-secondary btn-full">Load Example Route</button>
+              </div>
+              <div id="route-summary" class="card hidden">
+                <div class="card-title-row">
+                  <h3 class="card-title">Route Result</h3>
+                  <span class="badge badge-green">Dijkstra</span>
+                </div>
+                <div class="route-result">
+                  <div class="route-metrics">
+                    <div class="route-metric">
+                      <span class="metric-label">Distance</span>
+                      <span id="route-distance" class="metric-value">-- km</span>
+                    </div>
+                    <div class="route-metric">
+                      <span class="metric-label">Est. Time</span>
+                      <span id="route-time" class="metric-value">-- min</span>
+                    </div>
+                    <div class="route-metric">
+                      <span class="metric-label">Visited</span>
+                      <span id="route-visited" class="metric-value">--</span>
+                    </div>
+                  </div>
+                  <div class="route-divider"></div>
+                  <div id="route-path" class="route-path">
+                    <p class="path-placeholder">Select locations to find a route.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="map-panel">
+              <div class="card map-card-full">
+                <div class="map-toolbar">
+                  <div class="map-toolbar-left">
+                    <h3 class="card-title">Atlas City Map</h3>
+                    <span class="map-toolbar-badge">Road Network</span>
+                  </div>
+                  <div class="map-controls">
+                    <button id="map-fit-route" class="map-btn" title="Fit to route">&#9678;</button>
+                    <button id="map-zoom-in" class="map-btn" title="Zoom in">+</button>
+                    <button id="map-zoom-out" class="map-btn" title="Zoom out">-</button>
+                    <button id="map-reset-view" class="map-btn" title="Reset view">&#8634;</button>
+                  </div>
+                </div>
+                <div id="route-map-container" class="svg-map-container svg-map-large"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── DISCOVER PAGE (Rankings) ──────────────────────────────── -->
+        <div id="page-rankings" class="content-page">
+          <div class="page-content">
+            <!-- Featured Attraction -->
+            <div id="featured-attraction" class="featured-card fade-in">
+              <div class="featured-hero">
+                <div class="featured-image-area">
+                  <div class="featured-image-overlay"></div>
+                  <div class="featured-badge">#1 Attraction</div>
+                  <div class="featured-price">$100</div>
+                </div>
+                <div class="featured-info">
+                  <h3 class="featured-name">Loading attractions...</h3>
+                  <div class="featured-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                  <p class="featured-desc">Discover the best of Atlas City.</p>
+                  <div class="featured-tags">
+                    <span class="tag tag-blue">Atlas City</span>
+                    <span class="tag tag-green">2h</span>
+                    <span class="tag tag-amber">90 pts</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top 3 Spotlight -->
+            <div class="card top3-section">
+              <div class="card-title-row">
+                <h3 class="card-title">Top 3 Attractions</h3>
+                <span class="badge badge-blue">Heap Sort</span>
+              </div>
+              <p class="card-desc">Top-ranked attractions by composite score</p>
+              <div id="top3-spotlight" class="top3-grid">
+                <div class="top3-card"><div class="top3-rank">#1</div><h4>Loading...</h4></div>
+                <div class="top3-card"><div class="top3-rank">#2</div><h4>Loading...</h4></div>
+                <div class="top3-card"><div class="top3-rank">#3</div><h4>Loading...</h4></div>
+              </div>
+            </div>
+
+            <!-- All Attractions -->
+            <div class="card">
+              <div class="card-title-row">
+                <h3 class="card-title">All Attractions</h3>
+                <div class="discover-actions">
+                  <button id="refresh-rankings-btn" class="btn btn-primary btn-sm">Refresh</button>
+                </div>
+              </div>
+              <div class="sort-info-bar">
+                <span id="sort-info" class="sort-info-text">Sorted by rating using Heap Sort</span>
+              </div>
+              <div id="discover-list" class="discover-list">
+                <div class="empty-state">
+                  <div class="empty-icon">&#9733;</div>
+                  <p class="empty-title">Loading attractions...</p>
+                  <p class="empty-desc">Refresh to view all attractions ranked by Heap Sort.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Heap Sort Explanation -->
+            <div class="card">
+              <div class="card-title-row">
+                <h3 class="card-title">How Ranking Works</h3>
+                <span class="badge badge-green">O(n log n)</span>
+              </div>
+              <div class="algo-explanation">
+                <div class="algo-step">
+                  <div class="algo-step-num">1</div>
+                  <div class="algo-step-text">Each attraction gets a composite score: <strong>rating \u00D7 10 + value</strong></div>
+                </div>
+                <div class="algo-step">
+                  <div class="algo-step-num">2</div>
+                  <div class="algo-step-text">Heap Sort arranges all attractions by score in descending order</div>
+                </div>
+                <div class="algo-step">
+                  <div class="algo-step-num">3</div>
+                  <div class="algo-step-text">Top-ranked attractions appear first \u2014 ties broken alphabetically</div>
+                </div>
+                <div class="algo-complexity">
+                  <span>Time: O(n log n)</span>
+                  <span>Space: O(1)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SETTINGS PAGE ─────────────────────────────────────────── -->
+        <div id="page-settings" class="content-page">
+          <div class="page-content settings-layout">
+            <div class="card">
+              <h3 class="card-title">Appearance</h3>
+              <div class="setting-row">
+                <div class="setting-text"><span class="setting-label">Dark Mode</span><span class="setting-desc">Switch to dark theme (coming soon)</span></div>
+                <input type="checkbox" disabled>
+              </div>
+              <div class="setting-row">
+                <div class="setting-text"><span class="setting-label">Compact View</span><span class="setting-desc">Reduce spacing and padding</span></div>
+                <input type="checkbox" disabled>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="card-title">About</h3>
+              <div class="about-grid">
+                <div class="about-item"><span class="about-label">Application</span><span class="about-value">Trip Planner</span></div>
+                <div class="about-item"><span class="about-label">Version</span><span class="about-value">1.0.0</span></div>
+                <div class="about-item"><span class="about-label">City</span><span class="about-value">Atlas City</span></div>
+                <div class="about-item"><span class="about-label">Algorithms</span><span class="about-value">0-1 Knapsack, Dijkstra, Heap Sort</span></div>
+                <div class="about-item"><span class="about-label">Database</span><span class="about-value">SQLite (Offline)</span></div>
+                <div class="about-item"><span class="about-label">Data Structures</span><span class="about-value">DP Table, Priority Queue, Max-Heap</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="card-title">Demo Controls</h3>
+              <div class="btn-group">
+                <button id="settings-reset-btn" class="btn btn-secondary">Reset Demo Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content-area -->
+    </main>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
