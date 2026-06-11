@@ -1,179 +1,223 @@
-# Trip Planner - Web Application
+# Atlas Journey
 
-A complete offline trip-planning web application built for a college DAA (Design and Analysis of Algorithms) project. Features a polished SaaS-style dashboard with three classic algorithm implementations.
+Atlas Journey is a full-stack trip planning platform built as a Design and Analysis of Algorithms (DAA) project.
 
-## Architecture
+The system demonstrates the practical application of:
+
+- **Dijkstra's Algorithm**
+- **0-1 Knapsack**
+- **Heap Sort**
+
+through an interactive travel planning experience.
+
+## Features
+
+### Route Optimization
+Finds shortest travel routes using Dijkstra's Algorithm.
+
+### Smart Itinerary Planning
+Generates budget-aware itineraries using 0-1 Knapsack.
+
+### Attraction Ranking
+Ranks attractions using Heap Sort.
+
+### Offline Map System
+Custom Atlas City map with route visualization.
+
+### Local Storage
+SQLite-powered data persistence.
+
+### Modern UI
+Responsive travel-planner interface inspired by modern itinerary applications.
+
+## Technology Stack
+
+**Frontend:**
+- HTML5
+- CSS3
+- JavaScript
+
+**Backend:**
+- Java 24
+
+**Database:**
+- SQLite
+
+**Algorithms:**
+- Dijkstra's Algorithm
+- 0-1 Knapsack
+- Heap Sort
+
+## System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     Trip Planner App                        │
-├─────────────────────────────────────────────────────────────┤
-│  Frontend (HTML/CSS/JS)          Backend (Java)             │
-│  ┌──────────────────────┐       ┌────────────────────────┐ │
-│  │  Login Page          │       │  TripPlannerApp.java   │ │
-│  │  Dashboard           │       │  (HTTP Server :8080)   │ │
-│  │  Trip Planner (KP)   │◄─────►│  ┌──────────────────┐  │ │
-│  │  Route Planner (DJ)  │ JSON  │  │ Controllers      │  │ │
-│  │  Rankings (HS)       │       │  ├──────────────────┤  │ │
-│  │  Settings            │       │  │ Services         │  │ │
-│  └──────────────────────┘       │  ├──────────────────┤  │ │
-│                                  │  │ DatabaseManager  │  │ │
-│  SQLite (trip.db) ◄─────────────►│  └──────────────────┘  │ │
-│                                  └────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+User
+  ↓
+Frontend (HTML/CSS/JS)
+  ↓
+Java Backend
+  ↓
+Algorithm Layer
+  ↓
+SQLite Database
+  ↓
+JSON Response
+  ↓
+Frontend Rendering
 ```
 
-## Project Structure
+## Algorithms Used
+
+### Dijkstra's Algorithm
+
+**Purpose:** Computes the shortest route between two locations on the Atlas City map.
+
+**Complexity:**
+- **Time:** O((V + E) log V)
+- **Space:** O(V)
+
+### 0-1 Knapsack
+
+**Purpose:** Optimizes attraction selection within a fixed budget.
+
+**Complexity:**
+- **Time:** O(nW)
+- **Space:** O(nW)
+
+### Heap Sort
+
+**Purpose:** Ranks attractions by overall score.
+
+**Score Formula:**
+```
+score = rating × 10 + value
+```
+
+**Complexity:**
+- O(n log n)
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/ommd3076/atlas-journey-trip-planner.git
+cd atlas-journey-trip-planner
+```
+
+### Requirements
+
+- Java 24
+- SQLite JDBC Driver
+
+### Compile
+
+```bash
+javac -d webapp/bin -cp "lib/sqlite-jdbc-3.42.0.0.jar" @sources.txt
+```
+
+### Run
+
+```bash
+java -cp "webapp/bin;lib/sqlite-jdbc-3.42.0.0.jar" TripPlannerApp
+```
+
+### Open
 
 ```
-Trip-Planner/
-├── webapp/
-│   ├── src/                          # Java Backend
-│   │   ├── TripPlannerApp.java       # Main entry, HTTP server, API routes
-│   │   ├── DatabaseManager.java      # SQLite connection & schema
-│   │   ├── SeedData.java             # Sample data seeding
-│   │   ├── KnapsackService.java      # 0-1 Knapsack algorithm
-│   │   ├── DijkstraService.java      # Dijkstra's algorithm
-│   │   ├── HeapSortService.java      # Heap Sort algorithm
-│   │   ├── Attraction.java           # Attraction model
-│   │   ├── Edge.java                 # Edge model
-│   │   ├── PathResult.java           # Dijkstra result model
-│   │   └── KnapsackResult.java       # Knapsack result model
-│   ├── frontend/                     # Frontend SPA
-│   │   ├── index.html                # Complete HTML structure
-│   │   ├── styles.css                # Design system & styles
-│   │   └── app.js                    # SPA logic, API client, map renderer
-│   ├── bin/                          # Compiled classes
-│   └── trip.db                       # SQLite database (auto-created)
-├── lib/
-│   └── sqlite-jdbc-3.42.0.0.jar     # SQLite JDBC driver
-└── README.md
+http://localhost:8080
 ```
 
 ## Database Schema
 
-### Attractions Table
-| Column      | Type    | Description                     |
-|-------------|---------|---------------------------------|
-| id          | INTEGER | Primary key (auto-increment)    |
-| name        | TEXT    | Attraction name                 |
-| cost        | INTEGER | Cost to visit                   |
-| value       | INTEGER | Popularity/experience value     |
-| rating      | INTEGER | Rating (1-5)                    |
-| location    | TEXT    | Map location                    |
-| description | TEXT    | Brief description               |
+### Attractions
 
-### Edges Table
-| Column   | Type    | Description                     |
-|----------|---------|---------------------------------|
-| id       | INTEGER | Primary key (auto-increment)    |
-| fromNode | TEXT    | Source location                 |
-| toNode   | TEXT    | Destination location            |
-| weight   | INTEGER | Distance/cost of edge           |
+| Column | Type |
+|----------|----------|
+| id | INTEGER |
+| name | TEXT |
+| rating | INTEGER |
+| value | INTEGER |
+| cost | INTEGER |
+| x | INTEGER |
+| y | INTEGER |
 
-## Algorithms
+### Roads
 
-### 1. 0-1 Knapsack (Trip Planner Page)
+| Column | Type |
+|----------|----------|
+| source | TEXT |
+| destination | TEXT |
+| distance | INTEGER |
 
-**Purpose:** Optimize attraction selection within a given budget.
+## Project Workflow
 
-**Approach:** Dynamic Programming
-- Build a 2D DP table where `dp[i][w]` = maximum value achievable using first `i` items with budget `w`
-- For each item, decide to include or exclude based on which gives higher total value
-- Backtrack through the table to identify which items were selected
+### Route Planning
 
-**Complexity:**
-- **Time:** O(n × W) where n = number of attractions, W = budget amount
-- **Space:** O(n × W) for the DP table
-
-**UI Integration:** Enter your budget → click "Optimize Budget" → view selected and skipped attractions with cost/value badges.
-
-### 2. Dijkstra's Algorithm (Route Planner Page)
-
-**Purpose:** Find the shortest path between two locations on the map.
-
-**Approach:** Greedy + Priority Queue
-- Maintain distance estimates from start to all nodes
-- Use a min-priority queue to always expand the closest unvisited node
-- For each neighbor, if a shorter path is found, update distance and predecessor
-- Reconstruct the path by walking backwards from destination to start
-
-**Complexity:**
-- **Time:** O((V + E) log V) where V = vertices, E = edges
-- **Space:** O(V) for distance and predecessor maps
-
-**UI Integration:** Select start/destination → click "Find Shortest Path" → view path on map and distance in result card.
-
-### 3. Heap Sort (Rankings Page)
-
-**Purpose:** Sort attractions by rating in descending order.
-
-**Approach:** Max-Heap Data Structure
-- Build a max-heap from the attraction array (heapify all non-leaf nodes)
-- Repeatedly extract the maximum element and place it at the end
-- Restore heap property after each extraction
-- Reverse to get descending order
-
-**Complexity:**
-- **Time:** O(n log n) for all cases (best, average, worst)
-- **Space:** O(n) for the output array (in-place)
-
-**UI Integration:** Click "Refresh Rankings" → view attractions sorted by rating with rank badges and star ratings.
-
-## Setup Instructions
-
-### Prerequisites
-- Java JDK 11 or later
-- Modern web browser (Chrome, Firefox, Edge)
-
-### Running the Application
-
-```bash
-# Navigate to project root
-cd Trip-Planner
-
-# Clean compile
-javac -cp "lib\sqlite-jdbc-3.42.0.0.jar" -d webapp\bin webapp\src\*.java
-
-# Run the server
-java -cp "webapp\bin;lib\sqlite-jdbc-3.42.0.0.jar" TripPlannerApp
-
-# Open in browser
-# http://localhost:8080
+```
+User selects source and destination
+  ↓
+Frontend sends request
+  ↓
+Backend builds graph
+  ↓
+Dijkstra computes path
+  ↓
+Path returned
+  ↓
+Map renders route
 ```
 
-### Login Credentials
-- Username: `admin` / Password: `admin`
-- Or any non-empty username (demo mode)
+### Budget Planning
 
-## API Endpoints
+```
+Budget entered
+  ↓
+Attractions loaded
+  ↓
+Knapsack optimization
+  ↓
+Best itinerary generated
+```
 
-| Method | Endpoint              | Description                    |
-|--------|------------------------|--------------------------------|
-| POST   | `/api/login`          | Demo login                     |
-| GET    | `/api/dashboard`      | Dashboard statistics           |
-| POST   | `/api/knapsack`       | Solve 0-1 knapsack             |
-| POST   | `/api/dijkstra`       | Find shortest path             |
-| GET    | `/api/rankings`       | Get heap-sorted rankings       |
-| GET    | `/api/locations`      | Get all map locations          |
-| GET    | `/api/edges`          | Get all graph edges            |
-| POST   | `/api/reset`          | Reset demo data                |
-| POST   | `/api/example-route`  | Load example route             |
-| POST   | `/api/example-budget` | Load example budget plan       |
+### Rankings
 
-## Seed Data
+```
+Attractions loaded
+  ↓
+Scores computed
+  ↓
+Heap Sort executed
+  ↓
+Ranked list displayed
+```
 
-- **12 Attractions** with varied costs ($20-$250), values (45-95), ratings (3-5)
-- **10 Map Locations** connected by **18 directed edges**
-- **3 Demo Users** (admin, demo, traveler)
+## Screenshots
 
-## Key Features
+### Dashboard
 
-- ✅ Pure Java backend with embedded HTTP server (no frameworks)
-- ✅ Modern SPA frontend with card-based dashboard layout
-- ✅ Offline map with canvas rendering, markers, and route overlay
-- ✅ 3 fully implemented DAA algorithms with visible UI integration
-- ✅ SQLite database with automatic schema creation and seeding
-- ✅ Responsive design with CSS design system
-- ✅ Subtle animations and microinteractions
-- ✅ Demo controls for easy presentation
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Route Planner
+
+![Route Planner](docs/screenshots/routes.png)
+
+### Budget Planner
+
+![Budget Planner](docs/screenshots/budget.png)
+
+### Discover
+
+![Discover](docs/screenshots/discover.png)
+
+## Future Scope
+
+- Real-world map integration
+- Multi-user collaboration
+- Live traffic support
+- Recommendation engine
+- Cloud synchronization
+
+## License
+
+MIT License
