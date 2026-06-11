@@ -1,0 +1,15 @@
+# Compiled class files
+bin/
+webapp/bin/
+
+# Database files
+*.db
+
+# IDE files
+.classpath
+.project
+.settings/
+
+# OS files
+Thumbs.db
+.DS_Store
